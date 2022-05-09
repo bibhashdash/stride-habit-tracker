@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
+import VerifyEmail from "../views/VerifyEmail.vue";
+import Welcome from "../views/Welcome.vue";
+import LoggedOut from "../views/LoggedOut.vue";
+import EmailVerified from "../views/EmailVerified.vue";
 
 const routes = [
   {
@@ -10,9 +14,31 @@ const routes = [
     component: Login,
   },
   {
+    path: "/loggedout",
+    name: "LoggedOut",
+    component: LoggedOut,
+  },
+  {
     path: "/signup",
     name: "SignUp",
     component: SignUp,
+  },
+  {
+    path: "/:userid/verifyemail",
+    name: "VerifyEmail",
+    component: VerifyEmail,
+    props: true,
+  },
+  {
+    path: "/emailverified",
+    name: "EmailVerified",
+    component: EmailVerified,
+  },
+  {
+    path: "/:userid/welcome",
+    name: "Welcome",
+    component: Welcome,
+    props: true,
   },
 ];
 

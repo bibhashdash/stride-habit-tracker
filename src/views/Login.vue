@@ -8,16 +8,18 @@
       <h2 class="app-subdeck">Habits. Data. Driven</h2>
     </div>
 
-    <form class="form form-login">
+    <form @submit.prevent="handleLogin" class="form form-login">
       <input
         class="form-input input-login-email"
         type="text"
         placeholder="Email"
+        v-model="email"
       />
       <input
         class="form-input input-login-password"
         type="password"
         placeholder="Password"
+        v-model="password"
       />
       <button class="btn btn-primary btn-login">Login</button>
     </form>
@@ -32,7 +34,52 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
+import {
+  getAuth,
+  sendEmailVerification,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase/config";
+export default {
+  setup() {
+    const router = useRouter();
+    const email = ref("");
+
+    const password = ref("");
+    const errorCode = ref("");
+    const errorMessage = ref("");
+    const handleLogin = () => {
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email.value, password.value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          router.push({
+            name: "Welcome",
+            params: {
+              userid: user.uid,
+              useremail: user.email,
+            },
+          });
+        })
+        .catch((error) => {
+          errorCode.value = error.code;
+          errorMessage.value = error.message;
+        });
+    };
+    return {
+      email,
+      password,
+
+      handleLogin,
+
+      errorCode,
+      errorMessage,
+    };
+  },
+};
 </script>
 
 <style>

@@ -8,33 +8,106 @@
       <h2 class="app-subdeck">Habits. Data. Driven</h2>
     </div>
 
-    <form class="form form-signup">
+    <form @submit.prevent="handleSignUp" class="form form-signup">
       <input
+        v-model="email"
         class="form-input input-signup-email"
         type="text"
         placeholder="Email"
+        required
       />
       <input
+        v-model="password"
         class="form-input input-signup-password"
         type="password"
         placeholder="Password"
+        required
       />
       <input
+        v-model="passwordRetype"
         class="form-input input-signup-password"
         type="password"
         placeholder="Retype password"
+        required
       />
+      <div class="" v-if="passwordError">
+        <p>
+          🙃Error: Passwords do not match
+          <span
+            class="remove-password-error-message"
+            @click="removePasswordErrorMessage"
+            >❌</span
+          >
+        </p>
+      </div>
       <button class="btn btn-primary btn-signup">Create Account</button>
     </form>
 
     <div class="auth-extras">
-      <p>Already have an account? <router-link to="/">Login!</router-link></p>
+      <p>Already have an account? <router-link to="/">Login</router-link></p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
+import {
+  getAuth,
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../firebase/config";
+
+export default {
+  setup() {
+    const router = useRouter();
+    const passwordError = ref(false);
+    const email = ref("");
+
+    const password = ref("");
+    const passwordRetype = ref("");
+    const errorCode = ref("");
+    const errorMessage = ref("");
+    const removePasswordErrorMessage = () => {
+      passwordError.value = false;
+      password.value = "";
+      passwordRetype.value = "";
+    };
+    const handleSignUp = () => {
+      if (password.value != passwordRetype.value) {
+        passwordError.value = true;
+      } else {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            router.push({
+              name: "VerifyEmail",
+              params: {
+                userid: user.uid,
+              },
+            });
+          })
+          .catch((error) => {
+            errorCode.value = error.code;
+            errorMessage.value = error.message;
+          });
+      }
+    };
+    return {
+      email,
+      password,
+      passwordRetype,
+      handleSignUp,
+      passwordError,
+      errorCode,
+      errorMessage,
+      removePasswordErrorMessage,
+    };
+  },
+};
 </script>
 
 <style>
@@ -91,8 +164,11 @@ export default {};
   padding: 1% 5%;
   font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
-
+  cursor: pointer;
   font-weight: 700;
+}
+.btn:active {
+  background-color: #fff;
 }
 .btn-primary {
   background-color: #5ca33b;
@@ -106,5 +182,8 @@ export default {};
   font-size: 1.1rem;
   font-weight: 700;
   margin: 10px 0;
+}
+.remove-password-error-message {
+  cursor: pointer;
 }
 </style>
