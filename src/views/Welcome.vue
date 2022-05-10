@@ -10,7 +10,7 @@
       />
     </div>
     <p>
-      This part of your account is in suspended animation. The statistical
+      This part of the website is in suspended animation. The statistical
       likelihood is that other civilisations will arise. There will one day be
       lemon-soaked paper napkins. Till then, there will be a short delay. Please
       return to your seats by signing out.
