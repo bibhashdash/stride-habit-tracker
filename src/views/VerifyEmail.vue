@@ -5,6 +5,7 @@
   <p v-if="sentVerifyEmail">
     We've emailed you a link, check your inbox including any spam folders!
   </p>
+  <router-link to="/">Return to login page</router-link>
 </template>
 
 <script>

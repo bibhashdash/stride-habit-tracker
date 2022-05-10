@@ -6,6 +6,7 @@ import VerifyEmail from "../views/VerifyEmail.vue";
 import Welcome from "../views/Welcome.vue";
 import LoggedOut from "../views/LoggedOut.vue";
 import EmailVerified from "../views/EmailVerified.vue";
+import NewActivity from "../views/NewActivity.vue";
 
 const routes = [
   {
@@ -38,6 +39,12 @@ const routes = [
     path: "/:userid/welcome",
     name: "Welcome",
     component: Welcome,
+    props: true,
+  },
+  {
+    path: "/:userid/newactivity",
+    name: "NewActivity",
+    component: NewActivity,
     props: true,
   },
 ];

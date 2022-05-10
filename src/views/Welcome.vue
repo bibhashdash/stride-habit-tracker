@@ -15,6 +15,14 @@
       lemon-soaked paper napkins. Till then, there will be a short delay. Please
       return to your seats by signing out.
     </p>
+    <router-link
+      :to="{
+        name: 'NewActivity',
+        params: 'userId',
+      }"
+      ><button class="btn btn-primary">Add activity</button></router-link
+    >
+
     <button @click="handleSignOut" class="btn btn-primary">Sign Out</button>
   </div>
 </template>
