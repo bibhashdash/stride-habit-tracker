@@ -22,10 +22,23 @@
         v-model="password"
       />
       <button class="btn btn-primary btn-login">Login</button>
+      <!-- <div v-if="errorCode" class="">
+        <p>{{ errorMessage }}</p>
+      </div> -->
+      <div class="" v-if="errorCode">
+        <p>
+          {{ errorMessage }}
+          <span
+            class="remove-password-error-message"
+            @click="removeErrorMessage"
+            >❌</span
+          >
+        </p>
+      </div>
     </form>
 
     <div class="auth-extras">
-      <p>Forgot Password</p>
+      <!-- <p>Forgot Password</p> -->
       <p>
         Don't have an account? <router-link to="/SignUp">Sign up!</router-link>
       </p>
@@ -60,7 +73,6 @@ export default {
             name: "Welcome",
             params: {
               userid: user.uid,
-              useremail: user.email,
             },
           });
         })
@@ -68,6 +80,9 @@ export default {
           errorCode.value = error.code;
           errorMessage.value = error.message;
         });
+    };
+    const removeErrorMessage = () => {
+      errorCode.value = null;
     };
     return {
       email,
@@ -77,6 +92,7 @@ export default {
 
       errorCode,
       errorMessage,
+      removeErrorMessage,
     };
   },
 };
@@ -88,6 +104,8 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 10% 0;
+  width: 90%;
+  max-width: 500px;
 }
 .logo {
   width: 136px;
@@ -136,7 +154,7 @@ export default {
   padding: 1% 5%;
   font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
-
+  width: 200px;
   font-weight: 700;
 }
 .btn-primary {

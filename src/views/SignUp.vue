@@ -30,6 +30,18 @@
         placeholder="Retype password"
         required
       />
+      <button class="btn btn-primary btn-signup">Create Account</button>
+
+      <div class="" v-if="errorCode">
+        <p>
+          {{ errorMessage }}
+          <span
+            class="remove-password-error-message"
+            @click="removeErrorMessage"
+            >❌</span
+          >
+        </p>
+      </div>
       <div class="" v-if="passwordError">
         <p>
           🙃Error: Passwords do not match
@@ -40,7 +52,6 @@
           >
         </p>
       </div>
-      <button class="btn btn-primary btn-signup">Create Account</button>
     </form>
 
     <div class="auth-extras">
@@ -58,7 +69,8 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { auth, database } from "../firebase/config";
 
 export default {
   setup() {
@@ -75,6 +87,9 @@ export default {
       password.value = "";
       passwordRetype.value = "";
     };
+    const removeErrorMessage = () => {
+      errorCode.value = null;
+    };
     const handleSignUp = () => {
       if (password.value != passwordRetype.value) {
         passwordError.value = true;
@@ -83,6 +98,15 @@ export default {
         createUserWithEmailAndPassword(auth, email.value, password.value)
           .then((userCredential) => {
             const user = userCredential.user;
+            const docRef = doc(database, "users", user.uid);
+            setDoc(docRef, {
+              userData: {
+                pushups: 0,
+                pullups: 0,
+                mileage: 0,
+                booksCompleted: 0,
+              },
+            });
             router.push({
               name: "VerifyEmail",
               params: {
@@ -105,6 +129,7 @@ export default {
       errorCode,
       errorMessage,
       removePasswordErrorMessage,
+      removeErrorMessage,
     };
   },
 };
@@ -116,6 +141,8 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 10% 0;
+  width: 90%;
+  max-width: 500px;
 }
 .logo {
   width: 136px;

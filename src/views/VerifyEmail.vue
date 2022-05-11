@@ -16,6 +16,7 @@ export default {
   setup() {
     const sentVerifyEmail = ref(false);
     const handleVerifyEmail = () => {
+      sentVerifyEmail.value = false;
       const auth = getAuth();
 
       sendEmailVerification(auth.currentUser).then(() => {
@@ -39,5 +40,8 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 10% 0;
+}
+a {
+  cursor: pointer;
 }
 </style>
