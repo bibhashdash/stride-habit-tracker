@@ -1,4 +1,7 @@
 <template>
+  <div id="nav">
+    <Navbar :userid="userid" />
+  </div>
   <div class="welcome-page">
     <p>Hey there {{ userEmail }}!</p>
     <p>Here are your latest stats</p>
@@ -39,6 +42,7 @@
 </template>
 
 <script>
+import Navbar from "../components/Navbar.vue";
 import { useRouter } from "vue-router";
 import { ref } from "@vue/reactivity";
 import {
@@ -52,6 +56,7 @@ import {
 import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, database } from "../firebase/config";
 export default {
+  components: { Navbar },
   props: ["userid"],
   setup(props) {
     const router = useRouter();

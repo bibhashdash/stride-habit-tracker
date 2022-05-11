@@ -1,9 +1,12 @@
 <template>
   <nav id="nav" class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/welcome"
+      <!-- <router-link class="navbar-brand" to="/welcome"
         ><img class="nav-logo" src="../assets/images/track.png" alt="logo"
-      /></router-link>
+      /></router-link> -->
+      <div class="navbar-brand">
+        <img class="nav-logo" src="../assets/images/track.png" alt="logo" />
+      </div>
       <button
         class="navbar-toggler"
         type="button"
@@ -19,7 +22,11 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/welcome">Home</router-link>
+            <router-link
+              class="nav-link"
+              :to="{ name: welcome, params: { userid: userid } }"
+              >Home</router-link
+            >
           </li>
 
           <li class="nav-item">
@@ -32,7 +39,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["userid"],
+};
 </script>
 
 <style>
