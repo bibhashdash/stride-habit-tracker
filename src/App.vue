@@ -1,7 +1,16 @@
 <template>
-  <div id="nav"></div>
+  <div id="nav">
+    <Navbar />
+  </div>
   <router-view />
 </template>
+
+<script>
+import Navbar from "../src/components/Navbar.vue";
+export default {
+  components: { Navbar },
+};
+</script>
 
 <style>
 #app {
@@ -13,6 +22,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 600px;
 }
 h1,
 h2,
@@ -21,7 +32,7 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
+  margin: 0 !important;
 }
 
 /* #nav {

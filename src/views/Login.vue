@@ -150,15 +150,17 @@ export default {
   margin: 14px 0;
   height: 3.2rem;
   border-radius: 5px;
-  border: none;
+  border: none !important;
   padding: 1% 5%;
   font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
-  width: 200px;
+
+  width: 100%;
+
   font-weight: 700;
 }
 .btn-primary {
-  background-color: #5ca33b;
+  background-color: #5ca33b !important;
 }
 .auth-extras {
   display: flex;

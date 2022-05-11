@@ -25,15 +25,14 @@
       </div>
     </div>
 
-    <router-link
+    <!-- <router-link
+      class="btn btn-primary"
       :to="{
         name: 'NewActivity',
         params: { userid: userid },
       }"
-      ><button disabled class="btn btn-primary">
-        Add activity
-      </button></router-link
-    >
+      >Add activity</router-link
+    > -->
 
     <button @click="handleSignOut" class="btn btn-primary">Sign Out</button>
   </div>
@@ -126,9 +125,11 @@ export default {
   color: aqua;
 }
 .stats {
-  width: 90%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 .stat {
   display: flex;
@@ -138,5 +139,6 @@ export default {
 .stat-figure {
   font-size: 4rem;
   font-weight: 600;
+  margin: 0;
 }
 </style>
