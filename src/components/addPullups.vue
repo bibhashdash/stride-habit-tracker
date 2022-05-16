@@ -38,7 +38,7 @@ export default {
       }
     });
     const router = useRouter();
-    const pullups = ref("");
+    const pullups = ref(null);
     const submitPullups = () => {
       const docRef = doc(database, "users", `${uid.value}`);
 

@@ -47,6 +47,14 @@
       <addMileage v-if="activeIcon === 'mileage'" />
       <addBooks v-if="activeIcon === 'books'" />
     </div>
+    <router-link
+      class="nav-link"
+      :to="{ name: 'Welcome', params: { userid: userid } }"
+      ><span class="material-icons material-icons-outlined">
+        home
+      </span></router-link
+    >
+
     <div class="stamps">
       <p class="dateStamp">{{ todaysDate }}</p>
       <p class="timeStamp">{{ timeRightNow }}</p>

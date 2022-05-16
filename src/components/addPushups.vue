@@ -38,7 +38,7 @@ export default {
       }
     });
     const router = useRouter();
-    const pushups = ref("");
+    const pushups = ref(null);
     const submitPushups = () => {
       const docRef = doc(database, "users", `${uid.value}`);
 
