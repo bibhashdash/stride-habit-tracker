@@ -24,13 +24,13 @@
           <li class="nav-item">
             <router-link
               class="nav-link"
-              :to="{ name: welcome, params: { userid: userid } }"
+              :to="{ name: 'Welcome', params: { userid: userid } }"
               >Home</router-link
             >
           </li>
 
           <li class="nav-item">
-            <a class="nav-link">Sign Out</a>
+            <a class="nav-link" @click="handleSignOut">Sign Out</a>
           </li>
         </ul>
       </div>
@@ -39,8 +39,25 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
+
+import { signOut, getAuth } from "firebase/auth";
 export default {
   props: ["userid"],
+  setup() {
+    const router = useRouter();
+    const auth = getAuth();
+    const handleSignOut = () => {
+      signOut(auth)
+        .then(() => {
+          router.push("/loggedout");
+        })
+        .catch((err) => {
+          error.value = err.message;
+        });
+    };
+    return { handleSignOut };
+  },
 };
 </script>
 
@@ -49,8 +66,10 @@ export default {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-
+  padding: 0 4%;
   /* z-index: 5; */
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
 }
 
 #nav a {
@@ -78,31 +97,15 @@ export default {
   width: 50px;
 }
 
-/* .nav-cta {
-  background-color: #c40064;
-  border-radius: 5px;
-  width: auto;
-  text-align: center;
-  max-width: 200px;
-}
-.nav-cta:hover {
-  background-color: #211c4f;
-} */
-/* @media all and (min-width: 768px) {
-  #nav {
-    background: linear-gradient(to bottom, #c40064, #4e88c7);
-    padding: 10px 5%;
-  }
-}
 @media all and (min-width: 992px) {
-  #nav {
+  /* #nav {
     background: linear-gradient(to right, #c40064, #4e88c7);
     padding: 10px 5%;
-  }
+  } */
   .navbar-collapse {
     justify-content: flex-end;
   }
-  .nav-item {
+  /* .nav-item {
     margin-right: 10px;
   }
   .dropdown-menu {
@@ -114,12 +117,6 @@ export default {
 
   .nav-cta {
     width: 100px;
-  }
+  } */
 }
-
-@media all and (min-width: 1200px) {
-  #nav {
-    padding: 10px 10%;
-  }
-} */
 </style>

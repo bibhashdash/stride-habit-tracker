@@ -38,6 +38,22 @@ a {
   text-decoration: underline;
   color: #5ca33b !important;
 }
+.btn {
+  margin: 14px 0;
+  height: 3.2rem;
+  border-radius: 5px;
+  border: none !important;
+  padding: 1% 5%;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.1rem;
+
+  width: 100%;
+
+  font-weight: 700;
+}
+.btn-primary {
+  background-color: #5ca33b !important;
+}
 /* 
 #nav a.router-link-exact-active {
   color: #42b983;

@@ -3,7 +3,7 @@
     <Navbar :userid="userid" />
   </div>
   <div class="welcome-page">
-    <p>Hey there {{ userEmail }}!</p>
+    <p>Signed in as {{ userEmail }}</p>
     <p>Here are your latest stats</p>
     <div class="" v-if="error">
       {{ error }}
@@ -16,7 +16,7 @@
       </div>
       <div class="stat">
         <p class="stat-figure">{{ pullups }}</p>
-        <p class="stat-caption">pullups</p>
+        <p class="stat-caption">Pullups</p>
       </div>
       <div class="stat">
         <p class="stat-figure">{{ mileage }}</p>
@@ -28,16 +28,13 @@
       </div>
     </div>
 
-    <!-- <router-link
-      class="btn btn-primary"
+    <router-link
       :to="{
         name: 'NewActivity',
         params: { userid: userid },
       }"
-      >Add activity</router-link
-    > -->
-
-    <button @click="handleSignOut" class="btn btn-primary">Sign Out</button>
+      ><button class="btn btn-primary">Add activity</button></router-link
+    >
   </div>
 </template>
 
@@ -92,17 +89,8 @@ export default {
         error.value = "No data found!";
       }
     };
-    const handleSignOut = () => {
-      signOut(auth)
-        .then(() => {
-          router.push("/loggedout");
-        })
-        .catch((err) => {
-          error.value = err.message;
-        });
-    };
+
     return {
-      handleSignOut,
       userEmail,
       error,
       showData,
@@ -145,5 +133,9 @@ export default {
   font-size: 4rem;
   font-weight: 600;
   margin: 0;
+}
+.stat-caption {
+  color: #82cd64;
+  font-weight: 600;
 }
 </style>
