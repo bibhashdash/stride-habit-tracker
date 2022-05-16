@@ -143,7 +143,7 @@ export default {
   padding: 1% 5%;
   font-family: "Nunito", sans-serif;
   font-size: 0.7rem;
-
+  width: 100%;
   font-weight: 700;
 }
 

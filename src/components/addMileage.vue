@@ -1,6 +1,7 @@
 <template>
-  <h2>Add some Mileage</h2>
-  <span class="material-icons material-icons-outlined"> directions_run </span>
+  <!-- <h2>Add some Mileage</h2>
+  <span class="material-icons material-icons-outlined"> directions_run </span> -->
+  <p>This area is under construction</p>
 </template>
 
 <script>

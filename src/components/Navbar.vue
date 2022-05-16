@@ -70,6 +70,8 @@ export default {
   /* z-index: 5; */
   margin-bottom: 0.4rem;
   margin-top: 0.4rem;
+  border: 2px solid rgba(200, 200, 200, 0.316);
+  border-radius: 5px;
 }
 
 #nav a {

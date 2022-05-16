@@ -3,10 +3,6 @@
     <Navbar :userid="userid" />
   </div>
   <div class="newactivity-page">
-    <!-- <form @submit.prevent="submitPushups" action="">
-      <input class="form-input" type="number" name="" id="" />
-      <button class="btn btn-primary">submit</button>
-    </form> -->
     <h1>Add an activity</h1>
     <div class="activity-nav">
       <div
@@ -51,6 +47,10 @@
       <addMileage v-if="activeIcon === 'mileage'" />
       <addBooks v-if="activeIcon === 'books'" />
     </div>
+    <div class="stamps">
+      <p class="dateStamp">{{ todaysDate }}</p>
+      <p class="timeStamp">{{ timeRightNow }}</p>
+    </div>
   </div>
 </template>
 
@@ -69,6 +69,11 @@ export default {
   components: { Navbar, addPushups, addPullups, addMileage, addBooks },
   props: ["userid"],
   setup(props) {
+    const todaysDate = ref("");
+    const timeRightNow = ref("");
+    const d = new Date();
+    todaysDate.value = d.toDateString();
+    timeRightNow.value = d.toTimeString();
     const activeIcon = ref("pushups");
     const router = useRouter();
     const auth = getAuth();
@@ -101,16 +106,8 @@ export default {
         }
       });
     };
-    const pushups = ref("");
-    const submitPushups = () => {
-      console.log("you did some pushups!");
-      // const docRef = doc(database, "users", `${props.userId}`);
-      // console.log(docRef);
-      // updateDoc(docRef, {
-      //   "userData.pushups": pushups.value,
-      // });
-    };
-    return { submitPushups, pushups, activeIcon, activateComponent };
+
+    return { activeIcon, activateComponent, todaysDate, timeRightNow };
   },
 };
 </script>
@@ -150,5 +147,11 @@ export default {
 .activity-icon-caption {
   color: #82cd64;
   font-weight: 600;
+}
+.stamps {
+  position: fixed;
+  bottom: 5px;
+  left: 10px;
+  right: 10px;
 }
 </style>
