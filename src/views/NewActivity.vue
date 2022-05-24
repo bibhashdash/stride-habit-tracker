@@ -33,11 +33,27 @@
         <p class="activity-icon-caption">Running</p>
       </div>
       <div
+        class="activity-icon squashTime-icon"
+        @click="activateComponent('squashTime', $event)"
+      >
+        <span class="material-icons material-icons-outlined">
+          sports_tennis
+        </span>
+        <p class="activity-icon-caption">Squash</p>
+      </div>
+      <div
         class="activity-icon books-icon"
         @click="activateComponent('books', $event)"
       >
         <span class="material-icons material-icons-outlined"> menu_book </span>
         <p class="activity-icon-caption">Books</p>
+      </div>
+      <div
+        class="activity-icon puzzles-icon"
+        @click="activateComponent('puzzles', $event)"
+      >
+        <span class="material-icons material-icons-outlined"> extension </span>
+        <p class="activity-icon-caption">Puzzles</p>
       </div>
     </div>
     <div class="activity-recording">
@@ -46,6 +62,8 @@
       <addPullups v-if="activeIcon === 'pullups'" />
       <addMileage v-if="activeIcon === 'mileage'" />
       <addBooks v-if="activeIcon === 'books'" />
+      <addSquashTime v-if="activeIcon === 'squashTime'" />
+      <addPuzzles v-if="activeIcon === 'puzzles'" />
     </div>
     <router-link
       class="nav-link"
@@ -68,13 +86,23 @@ import addPushups from "../components/addPushups.vue";
 import addPullups from "../components/addPullups.vue";
 import addMileage from "../components/addMileage.vue";
 import addBooks from "../components/addBooks.vue";
+import addSquashTime from "../components/addSquashTime.vue";
+import addPuzzles from "../components/addPuzzles.vue";
 import { useRouter } from "vue-router";
 import { ref } from "@vue/reactivity";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, database } from "../firebase/config";
 export default {
-  components: { Navbar, addPushups, addPullups, addMileage, addBooks },
+  components: {
+    Navbar,
+    addPushups,
+    addPullups,
+    addMileage,
+    addBooks,
+    addSquashTime,
+    addPuzzles,
+  },
   props: ["userid"],
   setup(props) {
     const todaysDate = ref("");

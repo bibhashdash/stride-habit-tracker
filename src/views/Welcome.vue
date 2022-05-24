@@ -23,8 +23,16 @@
         <p class="stat-caption">Miles ran</p>
       </div>
       <div class="stat">
+        <p class="stat-figure">{{ squashTime }}</p>
+        <p class="stat-caption">Squash Minutes</p>
+      </div>
+      <div class="stat">
         <p class="stat-figure">{{ booksCompleted }}</p>
         <p class="stat-caption">Books completed</p>
+      </div>
+      <div class="stat">
+        <p class="stat-figure">{{ puzzles }}</p>
+        <p class="stat-caption">Puzzles</p>
       </div>
     </div>
 
@@ -63,7 +71,9 @@ export default {
     const pushups = ref("");
     const pullups = ref("");
     const mileage = ref("");
+    const squashTime = ref("");
     const booksCompleted = ref("");
+    const puzzles = ref("");
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -84,6 +94,9 @@ export default {
         pullups.value = userDoc.data().userData.pullups;
         pushups.value = userDoc.data().userData.pushups;
         mileage.value = userDoc.data().userData.mileage;
+        squashTime.value = userDoc.data().userData.squashTime;
+        puzzles.value = userDoc.data().userData.puzzles;
+
         booksCompleted.value = userDoc.data().userData.booksCompleted;
       } catch (err) {
         error.value = "No data found!";
@@ -97,7 +110,9 @@ export default {
       pullups,
       pushups,
       mileage,
+      squashTime,
       booksCompleted,
+      puzzles,
     };
   },
 };

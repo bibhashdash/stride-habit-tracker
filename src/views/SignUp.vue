@@ -104,7 +104,9 @@ export default {
                 pushups: 0,
                 pullups: 0,
                 mileage: 0,
+                squashTime: 0,
                 booksCompleted: 0,
+                puzzles: 0,
               },
             });
             router.push({

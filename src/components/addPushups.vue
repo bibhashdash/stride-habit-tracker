@@ -21,7 +21,7 @@ import { auth, database } from "../firebase/config";
 export default {
   name: "addPushups",
 
-  setup(props) {
+  setup() {
     const auth = getAuth();
     const uid = ref("");
 
