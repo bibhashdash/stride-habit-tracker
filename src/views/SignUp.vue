@@ -12,7 +12,7 @@
       <input
         v-model="email"
         class="form-input input-signup-email"
-        type="text"
+        type="email"
         placeholder="Email"
         required
       />
@@ -32,7 +32,7 @@
       />
       <button class="btn btn-primary btn-signup">Create Account</button>
 
-      <div class="" v-if="errorCode">
+      <div class="" v-if="errorMessage">
         <p>
           {{ errorMessage }}
           <span
@@ -99,6 +99,8 @@ export default {
           .then((userCredential) => {
             const user = userCredential.user;
             const docRef = doc(database, "users", user.uid);
+            const d = new Date();
+            const todaysDate = d.toDateString();
             setDoc(docRef, {
               userData: {
                 pushups: 0,
@@ -106,7 +108,9 @@ export default {
                 mileage: 0,
                 squashTime: 0,
                 booksCompleted: 0,
+                booksStarted: 0,
                 puzzles: 0,
+                dateJoined: todaysDate,
               },
             });
             router.push({

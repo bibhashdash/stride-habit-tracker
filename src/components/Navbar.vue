@@ -84,7 +84,7 @@ export default {
   border-color: transparent !important;
 }
 .bi-three-dots-vertical {
-  color: #5ca33b;
+  color: #82cd64;
 }
 /* nav li .router-link-exact-active {
   color: #211c4f !important;

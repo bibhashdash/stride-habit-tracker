@@ -3,7 +3,15 @@
     <Navbar :userid="userid" />
   </div>
   <div class="welcome-page">
-    <p>Signed in as {{ userEmail }}</p>
+    <p>
+      Signed in as: <span class="welcome-page-user-info">{{ userEmail }}</span>
+    </p>
+    <p>
+      Member since:
+      <span class="welcome-page-user-info"
+        >{{ dateJoined.slice(4, 10) }}, {{ dateJoined.slice(11) }}</span
+      >
+    </p>
     <p>Here are your latest stats</p>
     <div class="" v-if="error">
       {{ error }}
@@ -27,8 +35,11 @@
         <p class="stat-caption">Squash Minutes</p>
       </div>
       <div class="stat">
-        <p class="stat-figure">{{ booksCompleted }}</p>
-        <p class="stat-caption">Books completed</p>
+        <p class="stat-figure">{{ booksStarted }} / {{ booksCompleted }}</p>
+        <p class="stat-caption books-stat-caption">
+          Books <br />
+          Started / Completed
+        </p>
       </div>
       <div class="stat">
         <p class="stat-figure">{{ puzzles }}</p>
@@ -41,8 +52,9 @@
         name: 'NewActivity',
         params: { userid: userid },
       }"
-      ><button class="btn btn-primary">Add activity</button></router-link
     >
+      <button class="btn btn-primary">Add activity</button>
+    </router-link>
   </div>
 </template>
 
@@ -73,7 +85,9 @@ export default {
     const mileage = ref("");
     const squashTime = ref("");
     const booksCompleted = ref("");
+    const booksStarted = ref("");
     const puzzles = ref("");
+    const dateJoined = ref("");
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -98,6 +112,8 @@ export default {
         puzzles.value = userDoc.data().userData.puzzles;
 
         booksCompleted.value = userDoc.data().userData.booksCompleted;
+        booksStarted.value = userDoc.data().userData.booksStarted;
+        dateJoined.value = userDoc.data().userData.dateJoined;
       } catch (err) {
         error.value = "No data found!";
       }
@@ -112,7 +128,9 @@ export default {
       mileage,
       squashTime,
       booksCompleted,
+      booksStarted,
       puzzles,
+      dateJoined,
     };
   },
 };
@@ -126,6 +144,10 @@ export default {
   padding: 1% 5%;
   width: 90%;
   max-width: 500px;
+}
+.welcome-page-user-info {
+  color: #82cd64;
+  font-weight: bold;
 }
 .construction-img {
   width: 200px;
@@ -152,5 +174,24 @@ export default {
 .stat-caption {
   color: #82cd64;
   font-weight: 600;
+}
+.books-stat-caption {
+  text-align: center;
+}
+@media all and (min-width: 320px) and (max-width: 480px) {
+  p {
+    font-size: 12px;
+  }
+  .stat-figure {
+    font-size: 2rem;
+  }
+}
+@media all and (min-width: 480px) {
+  p {
+    font-size: 14px;
+  }
+  .stat-figure {
+    font-size: 3rem;
+  }
 }
 </style>

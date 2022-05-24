@@ -36,7 +36,7 @@ p {
 a {
   font-weight: bold;
   text-decoration: underline;
-  color: #5ca33b !important;
+  color: #82cd64 !important;
 }
 .btn {
   margin: 14px 0;
@@ -48,6 +48,7 @@ a {
   font-size: 1.1rem;
 
   width: 100%;
+  /* min-width: 300px; */
 
   font-weight: 700;
 }
@@ -58,4 +59,9 @@ a {
 #nav a.router-link-exact-active {
   color: #42b983;
 } */
+@media all and (min-width: 320px) and (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+}
 </style>

@@ -6,9 +6,9 @@
       type="number"
       name=""
       id=""
-      placeholder="How many today?"
+      placeholder="How many pullups today?"
     />
-    <button class="btn btn-primary">Add Pullups</button>
+    <button class="btn btn-primary">Submit</button>
   </form>
 </template>
 

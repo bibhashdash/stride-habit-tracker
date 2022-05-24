@@ -6,10 +6,10 @@
       type="number"
       name=""
       id=""
-      placeholder="How many today?"
+      placeholder="How many miles today?"
       step="0.01"
     />
-    <button class="btn btn-primary">Add Mileage</button>
+    <button class="btn btn-primary">Submit</button>
   </form>
 </template>
 

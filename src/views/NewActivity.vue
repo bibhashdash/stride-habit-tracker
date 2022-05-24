@@ -161,6 +161,7 @@ export default {
 .activity-nav {
   display: flex;
   justify-content: space-evenly;
+
   width: 100%;
   margin: 2rem 0;
 }
@@ -174,15 +175,16 @@ export default {
   /* height: 80px; */
 }
 .active-icon {
-  border: 2px solid #82cd64;
-  border-radius: 5px;
-
-  transform: scale(1.2);
-  box-shadow: 1px 3px 10px 4px rgba(0, 0, 0, 0.309);
+  /* border: 2px solid #82cd64; */
+  /* border-radius: 5px; */
+  border-bottom: 2px solid #fff;
+  /* transform: scale(1.2); */
+  /* box-shadow: 1px 3px 10px 4px rgba(0, 0, 0, 0.309); */
 }
 .activity-icon-caption {
   color: #82cd64;
   font-weight: 600;
+  font-size: 14px;
 }
 .stamps {
   position: fixed;
